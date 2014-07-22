@@ -1,5 +1,5 @@
-req_ks_successful = function() {
-                return Meteor.http.call(
+upsert_successful_projs = function() {
+                Meteor.http.call(
                 "GET",
                 "https://www.kickstarter.com/discover/advanced",
                 {
@@ -11,15 +11,25 @@ req_ks_successful = function() {
                     state:'successful',
                     sort:'launch_date',
                     page:1
-                },
-                
                 }
+                },
+                function(error, result){upsert_projs(result.data.projects)}
             );
             
         }
 
+upsert_projs = function (projects) {
+    projects.forEach(
+        function(proj){
+            console.log(proj.id);
+            Projects.upsert({id:proj.id},proj);
+        }
+    )
+    
+}
+        
 Meteor.methods(
     {
-        req_ks_successful: req_ks_successful
+        upsert_successful_projs: upsert_successful_projs
     }
 )

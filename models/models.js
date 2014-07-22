@@ -1,1 +1,1 @@
-Campaigns = new Meteor.Collection('campaigns');
+Projects = new Meteor.Collection('campaigns');
