@@ -6,7 +6,9 @@ Template.search.events({
         Projects.update(this._id,{$inc:{delivered_count:1}})
     },
     'click .failed' : function(evt, tmpl){
-        Projects.update(this._id,{$inc:{failed_count:1}})
+        var votesuser = {};
+        votesuser[('votes.'+Meteor.userId())]=true
+        Projects.update(this._id,{$set:votesuser});
     }    
 })
 
@@ -19,3 +21,7 @@ Template.search.helpers({
         return res;
     }
 })
+
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
+});
