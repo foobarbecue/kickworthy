@@ -7,7 +7,8 @@ Template.search.events({
     },
     'click .failed' : function(evt, tmpl){
         var votesuser = {};
-        votesuser[('votes.'+Meteor.userId())]=true
+        votesuser[('votes.'+Meteor.userId())+'.delivered'] = true
+        votesuser[('votes.'+Meteor.userId())+'.date'] = new Date()
         Projects.update(this._id,{$set:votesuser});
     }    
 })
