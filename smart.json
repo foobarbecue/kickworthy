@@ -1,5 +1,6 @@
 {
   "packages": {
-    "reactive-class": {}
+    "reactive-class": {},
+    "filter-collections": {}
   }
 }

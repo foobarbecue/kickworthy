@@ -2,13 +2,19 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "reactive-class": {}
+      "reactive-class": {},
+      "filter-collections": {}
     },
     "packages": {
       "reactive-class": {
         "git": "https://github.com/lingz/meteor-reactive-class.git",
         "tag": "v1.2.0",
         "commit": "0a92a2d22139e9d35124ccd5af1d5ac16d8f8f54"
+      },
+      "filter-collections": {
+        "git": "https://github.com/julianmontagna/filter-collections.git",
+        "tag": "v0.1.4",
+        "commit": "87bc9cee7a23459e427d4613383be3f67f29245c"
       }
     }
   }
