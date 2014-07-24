@@ -3,6 +3,10 @@
 </head>
 
 <body>
+<p>Kickstarter collects no information on project outcomes. They are <a href="https://www.kickstarter.com/blog/accountability-on-kickstarter">willfully ignorant</a> of which projects simply take backers' money and run, which ones don't quite manage to deliver, and which ones are brilliant successes.  Kickstarter would rather we didn't discuss that, so what we've been having is a <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/complete_list_of_funded_kickstarter_projects_that/">discussion informed by very spotty data</a>.</p>
+
+<p>Here at Kickworthy, we keep track of the outcomes people report from Kickstarter projects.</p>
+
   {{> loginButtons}}
   {{> search}}
 </body>
@@ -12,13 +16,19 @@
     <table id=results>
         {{#each results}}
             <tr>
-                <td>{{name}}</td>
+                <td><a href="http://www.kickstarter.com/projects/{{creator.id}}/{{slug}}">{{name}}</a></td>
                 <td>${{pledged}}</td>
                 <td>/</td>
                 <td>${{goal}}</td>
+                <td>{{ended}}</td>
                 <td class="delivered">delivered  ({{delivered_count}})</td>
                 <td class="failed">failed ({{failed_count}})</td>
             </tr>
         {{/each}}
     </table>
+</template>
+
+<template name="wall_of_shame">
+The best-funded failure is:
+The failure that was funded the highest percentage is:
 </template>

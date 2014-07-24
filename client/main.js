@@ -3,11 +3,14 @@ Template.search.events({
         Session.set("search-query", evt.currentTarget.value);
     },
     'click .delivered' : function(evt, tmpl){
-        Projects.update(this._id,{$inc:{delivered_count:1}})
+        var votesuser = {};
+        votesuser[('votes.'+Meteor.userId())+'.delivered'] = true
+        votesuser[('votes.'+Meteor.userId())+'.date'] = new Date()
+        Projects.update(this._id,{$set:votesuser});
     },
     'click .failed' : function(evt, tmpl){
         var votesuser = {};
-        votesuser[('votes.'+Meteor.userId())+'.delivered'] = true
+        votesuser[('votes.'+Meteor.userId())+'.delivered'] = false
         votesuser[('votes.'+Meteor.userId())+'.date'] = new Date()
         Projects.update(this._id,{$set:votesuser});
     }    
@@ -20,7 +23,39 @@ Template.search.helpers({
         res = Projects.find({$or: [{'name': new RegExp(query)},
                                     {'blurb': new RegExp(query)}]});
         return res;
-    }
+    },
+    'delivered_count' : function(){
+        var vote_count = 0
+        var project = this
+        // Looping through all projects for all users -- very very bad!
+        // Need to use database's aggregation but it's not implemented by meteor yet.
+        if (project.hasOwnProperty('votes')){
+            Meteor.users.find().forEach(function(usr){
+                if (project.votes.hasOwnProperty(usr._id) && project.votes[usr._id].delivered==true){
+                    vote_count++;
+                }
+            })
+            return vote_count;
+        }else{
+            return 0;
+        }
+    },
+    'failed_count' : function(){
+        var vote_count = 0
+        var project = this
+        // Looping through all projects for all users -- very very bad!
+        // See delivered_count, should probably factor out common
+        if (project.hasOwnProperty('votes')){
+            Meteor.users.find().forEach(function(usr){
+                if (project.votes.hasOwnProperty(usr._id) && project.votes[usr._id].delivered==false){
+                    vote_count++;
+                }
+            })
+            return vote_count;
+        }else{
+            return 0;
+        }
+    },
 })
 
 Accounts.ui.config({
