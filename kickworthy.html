@@ -8,6 +8,7 @@
 <p>Here at Kickworthy, we keep track of the outcomes people report from Kickstarter projects.</p>
 
   {{> loginButtons}}
+  {{> ks_un_form}}
   {{> search}}
 </body>
 
@@ -31,4 +32,12 @@
 <template name="wall_of_shame">
 The best-funded failure is:
 The failure that was funded the highest percentage is:
+</template>
+
+<template name="ks_un_form">
+    Enter your Kickstarter username here and we'll pull up the projects that you've backed.
+    <input type=text />
+    <button></button>
+    You backed:
+    {{backed}}
 </template>

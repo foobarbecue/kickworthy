@@ -1,3 +1,11 @@
+Template.ks_un_form.helpers({
+    'backed' : function(){
+        if (Meteor.user()){
+            return Meteor.user().profile.ks_backed.content
+        }
+    }
+})
+
 Template.search.events({
     'keyup input.search-query': function (evt) {
         Session.set("search-query", evt.currentTarget.value);
@@ -33,7 +41,6 @@ Template.search.helpers({
             }
         }
     },
-    
     'current_user_voted_failed' : function(){
         var project = this;
         var userId = Meteor.userId()        
