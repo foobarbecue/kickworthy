@@ -24,6 +24,26 @@ Template.search.helpers({
                                     {'blurb': new RegExp(query)}]});
         return res;
     },
+    'current_user_voted_delivered' : function(){
+        var project = this;
+        var userId = Meteor.userId()
+        if (project.hasOwnProperty('votes')){
+            if (project.votes.hasOwnProperty(userId) && project.votes[userId].delivered==true){
+                return 'highlight'
+            }
+        }
+    },
+    
+    'current_user_voted_failed' : function(){
+        var project = this;
+        var userId = Meteor.userId()        
+        if (project.hasOwnProperty('votes')){
+            if (project.votes.hasOwnProperty(userId) && project.votes[userId].delivered==false){
+                return 'highlight'
+            }
+        }   
+    },
+
     'delivered_count' : function(){
         var vote_count = 0
         var project = this

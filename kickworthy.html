@@ -21,8 +21,8 @@
                 <td>/</td>
                 <td>${{goal}}</td>
                 <td>{{ended}}</td>
-                <td class="delivered">delivered  ({{delivered_count}})</td>
-                <td class="failed">failed ({{failed_count}})</td>
+                <td class="delivered {{current_user_voted_delivered}}">delivered  ({{delivered_count}})</td>
+                <td class="failed {{current_user_voted_failed}}">failed ({{failed_count}})</td>
             </tr>
         {{/each}}
     </table>
