@@ -3,9 +3,9 @@
 </head>
 
 <body>
-<p>Kickstarter collects no information on project outcomes. They are <a href="https://www.kickstarter.com/blog/accountability-on-kickstarter">willfully ignorant</a> of which projects simply take backers' money and run, which ones don't quite manage to deliver, and which ones are brilliant successes.  Kickstarter would rather we didn't discuss that, so what we've been having is a <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/complete_list_of_funded_kickstarter_projects_that/">discussion informed by very spotty data</a>.</p>
+<p>Kickstarter is <a href="https://www.kickstarter.com/blog/accountability-on-kickstarter">not interested in providing information</a> about which projects turn out to be scams, which ones deliver late or never, and which ones are brilliant successes. 
 
-<p>Here at Kickworthy, we keep track of the outcomes people report from Kickstarter projects.</p>
+There has been <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/complete_list_of_funded_kickstarter_projects_that/">some effort</a> to collect that sort of data, but they have been haphazard and incomplete. Kickworthy compiles outcomes of crowdfunded projects systematically based on user reports.</p>
 
   {{> loginButtons}}
   {{> ks_un_form}}
@@ -35,9 +35,19 @@ The failure that was funded the highest percentage is:
 </template>
 
 <template name="ks_un_form">
-    Enter your Kickstarter username here and we'll pull up the projects that you've backed.
-    <input type=text />
-    <button></button>
+    <div class="black_border">
+    Enter your Kickstarter id here and we'll pull up the projects that you've backed. To find out what your kickstarter id is:
+    <ul>
+    <li>go to kickstarter.com</li>
+    <li>go to "account settings"</li>
+    <li>click on "view profile" at the bottom next to "save settings"</li>
+    <li>copy the part of the URL after "profile/" and paste it here.</li>
+    </ul>
+    <p>
+    <input type=text id="ks_un_input"/>
+    <button>set kickstarter username / id</button>
+    </p>
     You backed:
-    {{backed}}
+    {{{backed}}}
+    </div>
 </template>

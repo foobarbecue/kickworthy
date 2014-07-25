@@ -2,3 +2,6 @@
 .highlight{
     color: red
 }
+.black_border{
+    border: thin black solid;
+}

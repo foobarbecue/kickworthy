@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "reactive-class": {},
-      "filter-collections": {}
+      "filter-collections": {},
+      "npm": {}
     },
     "packages": {
       "reactive-class": {
@@ -15,6 +16,11 @@
         "git": "https://github.com/julianmontagna/filter-collections.git",
         "tag": "v0.1.4",
         "commit": "87bc9cee7a23459e427d4613383be3f67f29245c"
+      },
+      "npm": {
+        "git": "https://github.com/arunoda/meteor-npm.git",
+        "tag": "v0.2.6",
+        "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
       }
     }
   }

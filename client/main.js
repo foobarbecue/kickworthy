@@ -1,8 +1,16 @@
 Template.ks_un_form.helpers({
     'backed' : function(){
         if (Meteor.user()){
-            return Meteor.user().profile.ks_backed.content
+            return $(Meteor.user().profile.ks_backed.content).find('h4 a').text();
         }
+    }
+})
+
+Template.ks_un_form.events({
+    'click button' : function(){
+        Meteor.call('add_ks_un',$('#ks_un_input').val());
+        Meteor.call('add_user_backed');
+        
     }
 })
 
