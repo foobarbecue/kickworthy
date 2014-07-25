@@ -41,14 +41,18 @@ add_user_backed = function(){
                 "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36"
         }},
         function(error, result){
-            // Use cheerio (like server-side jquery) to extract project names from 
-            // Kickstarter's strange backed.js private api
+            // Use cheerio (like server-side jquery) to extract project names. 
+            // Originally used Kickstarter's strange backed.js private api, but it only
+            // seems to provide the first four backed projects.
             var titles = cheerio.load(result.content);
             var titles = titles('a.project_item');
             
             // Remove unnecessary info before storing to DB
             var titles_clean = []
-            titles.each(function(i,el){titles_clean.push(cheerio(this).attr('href'))})
+            
+            // Make full URL to fit with output from Kickstarter Discover api
+            titles.each(function(i,el){
+                titles_clean.push('https://www.kickstarter.com' + cheerio(this).attr('href'))})
 
             Meteor.users.update({_id:Meteor.user()._id}, {$set:{'profile.ks_backed':titles_clean}})
         }

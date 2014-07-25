@@ -10,7 +10,9 @@ Template.ks_un_form.events({
     'click button' : function(){
         Meteor.call('add_ks_un',$('#ks_un_input').val());
         Meteor.call('add_user_backed');
-        
+    },
+    'click .toggle_help' : function(){
+        $('#ks_un_help').slideToggle();
     }
 })
 
@@ -29,16 +31,27 @@ Template.search.events({
         votesuser[('votes.'+Meteor.userId())+'.delivered'] = false
         votesuser[('votes.'+Meteor.userId())+'.date'] = new Date()
         Projects.update(this._id,{$set:votesuser});
-    }    
+    },
+    'input .proj_comments' : function(evt, tmpl){
+        var usr_vote_note = {};
+        usr_vote_note['votes.'+Meteor.userId()+'.note']=evt.currentTarget.textContent
+        Projects.update({_id:this._id},{$set:usr_vote_note})
+    }
 })
 
 Template.search.helpers({
     'results' : function(){
         console.log(Session.get("search-query"));
         var query = Session.get("search-query");
-        res = Projects.find({$or: [{'name': new RegExp(query)},
-                                    {'blurb': new RegExp(query)}]});
-        return res;
+        if ($('input[name=backed_filter]:checked').val()==='all'){
+            return Projects.find({$or: [{'name': new RegExp(query)},
+                                        {'blurb': new RegExp(query)}]});
+        }else{
+            if (Meteor.user()){
+            // TODO rewrite for readability
+            return Projects.find({$and:[{'urls.web.project':{$in:Meteor.user().profile.ks_backed}}, {'blurb':new RegExp(query)}]}).fetch()
+            }
+        }
     },
     'current_user_voted_delivered' : function(){
         var project = this;

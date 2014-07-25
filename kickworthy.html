@@ -5,7 +5,7 @@
 <body>
 <p>Kickstarter is <a href="https://www.kickstarter.com/blog/accountability-on-kickstarter">not interested in providing information</a> about which projects turn out to be scams, which ones deliver late or never, and which ones are brilliant successes. 
 
-There has been <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/complete_list_of_funded_kickstarter_projects_that/">some effort</a> to collect that sort of data, but they have been haphazard and incomplete. Kickworthy compiles outcomes of crowdfunded projects systematically based on user reports.</p>
+There has been <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/complete_list_of_funded_kickstarter_projects_that/">some effort</a> to collect that sort of data, but is has been haphazard and incomplete. Kickworthy compiles outcomes of crowdfunded projects systematically based on user reports.</p>
 
   {{> loginButtons}}
   {{> ks_un_form}}
@@ -13,7 +13,11 @@ There has been <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/comp
 </body>
 
 <template name="search">
+    Search:
+    <input type="radio" id="backed_radio" name="backed_filter" value="backed" checked/>projects you backed
+    <input type="radio" id="all_radio" name="backed_filter" value="all"/>all projects
     <input type="text" class="search-query" />
+
     <table id=results>
         {{#each results}}
             <tr>
@@ -24,6 +28,7 @@ There has been <a href="http://www.reddit.com/r/kickstarter/comments/1j6ubm/comp
                 <td>{{ended}}</td>
                 <td class="delivered {{current_user_voted_delivered}}">delivered  ({{delivered_count}})</td>
                 <td class="failed {{current_user_voted_failed}}">failed ({{failed_count}})</td>
+                <td class="proj_comments" contenteditable="true">comments here</td>
             </tr>
         {{/each}}
     </table>
@@ -36,18 +41,20 @@ The failure that was funded the highest percentage is:
 
 <template name="ks_un_form">
     <div class="black_border">
-    Enter your Kickstarter id here and we'll pull up the projects that you've backed. To find out what your kickstarter id is:
+    <p>
+    <input type=text id="ks_un_input"/>
+    <button>set kickstarter username / id</button>
+    <a class="toggle_help" href="javascript:void(0)"><img src="/img/q.png" /></a>
+    </p>
+    <div class="help collapsed" id="ks_un_help">
+    Enter your Kickstarter id here so we can pull up the projects that you've backed.
+    To find out what your kickstarter id is:
     <ul>
     <li>go to kickstarter.com</li>
     <li>go to "account settings"</li>
     <li>click on "view profile" at the bottom next to "save settings"</li>
     <li>copy the part of the URL after "profile/" and paste it here.</li>
     </ul>
-    <p>
-    <input type=text id="ks_un_input"/>
-    <button>set kickstarter username / id</button>
-    </p>
-    You backed:
-    {{{backed}}}
+    </div>
     </div>
 </template>

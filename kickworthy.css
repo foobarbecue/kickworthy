@@ -5,3 +5,9 @@
 .black_border{
     border: thin black solid;
 }
+.collapsed{
+    display: none;
+}
+.proj_comments{
+    color: gray;
+}
